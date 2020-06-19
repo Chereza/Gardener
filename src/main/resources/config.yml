@@ -1,0 +1,26 @@
+config:
+  RequiredTwerkCount: 10 # default: 10
+  RangeForShifting: 5 # default: 5
+  GrowingParticle: true
+  MushroomTreesOnlyOnMycelium: true
+Trees:
+  OakTree: true
+  SpruceTree: true
+  BirchTree: true
+  AcaciaTree: true
+  JungleTree: true
+  BigOakTree: false # developing
+  BigSpruceTree: true
+  BigJungleTree: true
+  DarkOakTree: true
+  RedMushroomTree: true
+  BrownMushroomTree: true
+Crops:
+  Wheat: true
+  Carrot: true
+  Potato: true
+  Melon: true
+  Pumpkin: true
+
+# do not change
+config-version: 1
