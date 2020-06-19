@@ -4,17 +4,17 @@ config:
   GrowingParticle: true
   MushroomTreesOnlyOnMycelium: true
 Trees:
-  OakTree: true
-  SpruceTree: true
-  BirchTree: true
-  AcaciaTree: true
-  JungleTree: true
-  BigOakTree: false # developing
-  BigSpruceTree: true
-  BigJungleTree: true
-  DarkOakTree: true
-  RedMushroomTree: true
-  BrownMushroomTree: true
+  Oak: true
+  Spruce: true
+  Birch: true
+  Acacia: true
+  Jungle: true
+  BigOak: false # developing
+  BigSpruce: true
+  BigJungle: true
+  DarkOak: true
+  RedMushroom: true
+  BrownMushroom: true
 Crops:
   Wheat: true
   Carrot: true
