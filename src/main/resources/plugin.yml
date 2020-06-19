@@ -2,7 +2,7 @@ main: de.jeff_media.Gardener.Main
 name: Gardener
 version: 1.0-SNAPSHOT
 api-version: 1.13
-description: Allows automatic chest sorting
-authors: [mfnalex, Caczec]
+description: A plugin for growing crops and trees faster
+authors: [mfnalex, Cazcez]
 prefix: Gardener
 database: false
