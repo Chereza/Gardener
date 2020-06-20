@@ -6,6 +6,7 @@ import org.bukkit.Tag;
 import org.bukkit.TreeType;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.Ageable;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nullable;
@@ -82,8 +83,7 @@ public class TreeUtils {
                 for (int z = player.getLocation().getBlockZ() - range; z <= player.getLocation().getBlockZ()
                         + range; z++) {
                     Block block = player.getWorld().getBlockAt(x, y, z);
-                    if (Tag.SAPLINGS.isTagged(block.getType()) || block.getType().equals(Material.BROWN_MUSHROOM)
-                            || block.getType().equals(Material.RED_MUSHROOM)) {
+                    if (isSapling(block) || isCrop(block)) {
                         saplings.add(block);
                     }
                 }
@@ -195,10 +195,14 @@ public class TreeUtils {
         return block[0].getWorld().getBlockAt(x, y, z);
     }
 
-    void grow(Block block, Player player) {
-        if (!main.twerkHandler.twerkCount.containsKey(block)) {
-            main.twerkHandler.twerkCount.put(block, 0);
+    void spawnParticles(Player p, Block block) {
+        if (main.getConfig().getBoolean("config.GrowingParticle")) {
+            p.spawnParticle(Particle.SPELL, block.getLocation(), 20, 1D, 0D, 1D);
         }
+    }
+
+    void growTree(Block block, Player player) {
+
 
         if (main.getConfig().getBoolean("config.MushroomTreesOnlyOnMycelium")
                 && (block.getType().equals(Material.BROWN_MUSHROOM) || block.getType().equals(Material.RED_MUSHROOM)))
@@ -208,20 +212,14 @@ public class TreeUtils {
                 return;
         }
 
-        int newtwerk = main.twerkHandler.twerkCount.get(block) + 1;
-        if (newtwerk >= main.getConfig().getInt("config.RequiredTwerkCount")) {
-            //System.out.println("debug1");
+
 
             boolean isBigTree = (getBigTreeBlocks(block)!=null);
             TreeType type = getTreeType(block, isBigTree);
             if(type==null) return;
-            //System.out.println("debug2");
             Block[] bigTreeBlocks = getBigTreeBlocks(block);
 
             if(type==TreeType.DARK_OAK && bigTreeBlocks==null) return;
-            //System.out.println(type);
-            //System.out.println(bigTreeBlocks==null ? "null" : "nonnull");
-            //System.out.println("debug3");
 
             // Check if this TreeType is allowed
             if(!isTreeEnabled(type, isBigTree)) {
@@ -267,11 +265,55 @@ public class TreeUtils {
                     }
                 }
             }
-        } else {
-            main.twerkHandler.twerkCount.put(block, newtwerk);
-            //LastTwerk.put(block, System.currentTimeMillis());
-        }
+    }
 
+    static Boolean isCrop(Block block) {
+        if(block.getBlockData() != null && block.getBlockData() instanceof Ageable) {
+            return true;
+        }
+        return false;
+    }
+
+    static Boolean isCactus(Block block) {
+        if(block.getType() != Material.CACTUS) return false;
+        if(block.getRelative(BlockFace.UP).getType()!= Material.AIR) return false;
+        if(block.getRelative(BlockFace.DOWN).getType()==Material.CACTUS
+        && block.getRelative(BlockFace.DOWN).getRelative(BlockFace.DOWN).getType() == Material.CACTUS) return false;
+        return true;
+    }
+
+    static void growCactus() {
+
+    }
+
+    static Boolean isMaxAge(Ageable ageable) {
+        return ageable.getAge() == ageable.getMaximumAge();
+    }
+
+    Boolean growCrop(Block block) {
+        if(!isCrop(block)) return false;
+        Ageable ageable = (Ageable) block.getBlockData();
+        if(isMaxAge(ageable)) return false;
+        ageable.setAge(ageable.getAge()+1);
+        //System.out.println(ageable.getAge());
+        block.setBlockData(ageable);
+        return true;
+    }
+
+    static Boolean isSapling(Block block) {
+        switch(block.getType()) {
+            case ACACIA_SAPLING:
+            case BIRCH_SAPLING:
+            case DARK_OAK_SAPLING:
+            case OAK_SAPLING:
+            case JUNGLE_SAPLING:
+            case SPRUCE_SAPLING:
+            case RED_MUSHROOM:
+            case BROWN_MUSHROOM:
+                return true;
+            default:
+                return false;
+        }
     }
 
     private Boolean checkForMycelium(Block block)
