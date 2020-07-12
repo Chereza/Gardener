@@ -3,24 +3,28 @@ config:
   RangeForShifting: 5 # default: 5
   GrowingParticle: true
   MushroomTreesOnlyOnMycelium: true
-Trees:
-  Oak: true
-  Spruce: true
-  Birch: true
-  Acacia: true
-  Jungle: true
-  BigOak: false # developing
-  BigSpruce: true
-  BigJungle: true
-  DarkOak: true
-  RedMushroom: true
-  BrownMushroom: true
-Crops:
-  Wheat: true
-  Carrot: true
-  Potato: true
-  Melon: true
-  Pumpkin: true
+  WorkWithPermissions: true
+  
+  
+default:
+  Trees:
+    Oak: true
+    Spruce: true
+    Birch: true
+    Acacia: true
+    Jungle: true
+    BigOak: false # developing
+    BigSpruce: true
+    BigJungle: true
+    DarkOak: true
+    RedMushroom: true
+    BrownMushroom: true
+  Crops:
+    Wheat: true
+    Carrot: true
+    Potato: true
+    Melon: true
+    Pumpkin: true
 
 # do not change
-config-version: 1
+config-version: 2
