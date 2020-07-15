@@ -7,7 +7,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.entity.Player;
 
-import de.jeff_media.Gardener.Main;
+import xyz.Cazcez.Gardener.Main;
 
 public class Finder 
 {

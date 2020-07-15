@@ -5,8 +5,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 
-import xyz.Cazcez.Gardener.Utility.Finder;
-
 public class EventListener implements Listener 
 {
 
@@ -30,7 +28,6 @@ public class EventListener implements Listener
 		for (Block block : finder.getNearby(e.getPlayer()))
 		{
 			
-
 		}
     }
 
