@@ -25,12 +25,12 @@ public class EventListener implements Listener
     	
 		xyz.Cazcez.Gardener.Utility.Finder finder = new xyz.Cazcez.Gardener.Utility.Finder(main);
 		
+		boolean permission = main.getConfig().getBoolean("WorkWithPermissions");
+
 		for (Block block : finder.getNearby(e.getPlayer()))
 		{
-			if (main.getConfig().getBoolean("WorkWithPermissions"))
-			{
-				
-			}
+			
+
 		}
     }
 
